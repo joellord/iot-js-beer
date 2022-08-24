@@ -8,7 +8,7 @@ import Temp from "./slides/Temp";
 
 import ImgBeer from "./assets/beer.jpg";
 import ImgGraphDevices from "./assets/graph_devices.png";
-import ImgGraphDevicesPop from "./assets/graph_devices_population.png";
+// import ImgGraphDevicesPop from "./assets/graph_devices_population.png";
 import ImgThinking from "./assets/thinking.gif";
 import ImgPBnJ from "./assets/pbj.jpg";
 import ImgEspruino from "./assets/wifiespruino.jpg";
@@ -17,10 +17,19 @@ import ImgInterlude from "./assets/interlude.jpg";
 import ImgTilt from "./assets/tilt.jpg";
 import ImgStages from "./assets/stages-iot-architecture.png";
 import ImgDiagram from "./assets/iot-js-beer.png";
-import ImgRealmFunction from "./assets/realm-function.png";
-import ImgTrigger from "./assets/trigger.png";
+import ImgDiagramFunctions from "./assets/iot-js-beer-functions.png";
+import ImgDiagramDatabase from "./assets/iot-js-beer-database.png";
+import ImgTimeSeries from "./assets/TimeSeries.gif";
+import ImgTimeSeries2 from "./assets/TimeSeries2.gif";
+import ImgDiagramAggregation from "./assets/iot-js-beer-aggregation.png";
+import ImgDiagramTriggers from "./assets/iot-js-beer-triggers.png";
+import ImgDiagramCharts from "./assets/iot-js-beer-charts.png";
+import ImgRealmFunction from "./assets/atlas-video-function-https.gif";
+import ImgAggregation from "./assets/atlas-video-aggregation.gif";
+import ImgTrigger from "./assets/atlas-video-trigger.gif";
+import ImgCharts from "./assets/atlas-video-chart.gif";
 import ImgMindBlown from "./assets/mindblown.gif";
-
+import ImgSponsors from "./assets/sponsors.png";
 import VidRobocalypse from "./assets/robocalypse.mp4";
 
 import './App.css';
@@ -29,11 +38,13 @@ const SHOW_NOTES = false;
 
 const talkProps = {
   title: "IoT, JS and Beer Brewing: 🍻",
-  conference: "Connect.Tech",
-  conferenceHashTag: "#ConnectTech",
-  date: "November 9th, 2021",
+  conference: "THAT Conference",
+  conferenceHashTag: "#ThatConference",
+  date: "July, 2022",
   moreInfoUrl: "http://ezurl.to/cheers"
 }
+
+//https://www.mongodb.com/developer/article/Paginations_Time_Series_Collections_in_five_minutes/
 
 const footer = <Footer left={`@joel__lord ${talkProps.conferenceHashTag}`} right={`${talkProps.moreInfoUrl}`} />
 
@@ -47,6 +58,16 @@ function App() {
         notes="."
         />
 
+      <ImageWithTitle
+        img={ ImgSponsors }
+      />
+
+      <ImageWithTitle 
+        title={talkProps.title}
+        img={ ImgBeer } 
+        notes="."
+      />
+
       <Slide>
         <Title>IoT Devices</Title>
         <Subtitle>¯\_(ツ)_/¯</Subtitle>
@@ -57,10 +78,10 @@ function App() {
         <Image src={ImgGraphDevices} />
       </Slide>
 
-      <Slide>
+      {/* <Slide>
         <Subtitle>IoT Devices</Subtitle>
         <Image src={ImgGraphDevicesPop} />
-      </Slide>
+      </Slide> */}
 
       <ImageWithTitle
         img={ImgThinking}
@@ -69,19 +90,26 @@ function App() {
 
       <Multistep>
         <Title>My devices</Title>
-        <List>
+        <List className="two-rows">
           <li style={{fontSize: "1.25em"}}>4 laptops</li>
           <li style={{fontSize: "1.25em"}}>2 cell phones</li>
           <li style={{fontSize: "1.25em"}}>2 tablets</li>
           <li style={{fontSize: "1.25em"}}>1 thermostat</li>
           <li style={{fontSize: "1.25em"}}>2 smoke detectors</li>
           <li style={{fontSize: "1.25em"}}>1 TV</li>
-          <li style={{fontSize: "1.25em"}}>2 smart bulbs</li>
+          <li style={{fontSize: "1.25em"}}>1 car</li>
+          <li style={{fontSize: "1.25em"}}>4 smart bulbs</li>
           <li style={{fontSize: "1.25em"}}>3 connected plugs</li>
           <li style={{fontSize: "1.25em"}}>3 connected speakers</li>
+          <li style={{fontSize: "1.25em"}}>3 cameras</li>
           <li style={{fontSize: "1.25em"}}>3 home assistants</li>
           <li style={{fontSize: "1.25em"}}>2 door locks</li>
+          <li style={{fontSize: "1.25em"}}>1 garage door</li>
+          <li style={{fontSize: "1.25em"}}>1 heated floor controller</li>
+          <li style={{fontSize: "1.25em"}}>1 shower</li>
           <li style={{fontSize: "1.25em"}}>1 vacuum</li>
+          <li style={{fontSize: "1.25em"}}>1 cat litter</li>
+          <li style={{fontSize: "1.25em"}}>1 toothbrush</li>
           <li style={{fontSize: "1.25em"}}>2 fermenters</li>
         </List>
       </Multistep>
@@ -121,6 +149,7 @@ function App() {
       <Slide>
         <Title>JS on Devices</Title>
         <List>
+          <li>Arduino</li>
           <li>Espruino</li>
           <li>Raspberry Pi</li>
         </List>
@@ -167,8 +196,8 @@ setInterval(() => {
 
       <CodeSlide title="Raspberry Pi">
         {`
-npm install --save johnny-five 
-npm install --save raspi-io
+npm install johnny-five 
+npm install raspi-io
         `}
       </CodeSlide>
 
@@ -189,7 +218,11 @@ board.on("ready", () => {
 
       <Slide>
         <Subtitle>Espruino vs Raspberry Pi</Subtitle>
-      </Slide>
+      </Slide> 
+
+      <Slide>
+        <Subtitle>What About the Blues Wireless Notecard?</Subtitle>
+      </Slide> 
 
       <ImageWithTitle title="Interlude" img={ImgInterlude} />
 
@@ -229,13 +262,21 @@ board.on("ready", () => {
       </Slide>
 
       <Slide>
+        <Image src={ImgDiagramFunctions} />
+      </Slide>
+
+      <Slide>
         <Title>Serverless</Title>
-        <Subtitle>Realm Functions</Subtitle>
+        <Subtitle>Atlas Functions</Subtitle>
       </Slide>
 
       <Slide>
         <Title>Serverless</Title>
         <Image src={ImgRealmFunction} />
+      </Slide>
+
+      <Slide>
+        <Image src={ImgDiagramDatabase} />
       </Slide>
 
       <Slide>
@@ -245,7 +286,18 @@ board.on("ready", () => {
 
       <Slide>
         <Title>Database</Title>
-        <Subtitle>Compass</Subtitle>
+        <Subtitle>Time Series</Subtitle>
+        <Image src={ImgTimeSeries} />
+      </Slide>
+
+      <Slide>
+        <Title>Database</Title>
+        <Subtitle>Time Series</Subtitle>
+        <Image src={ImgTimeSeries2} />
+      </Slide>
+
+      <Slide>
+        <Image src={ImgDiagramAggregation} />
       </Slide>
 
       <Slide>
@@ -253,7 +305,12 @@ board.on("ready", () => {
         <Subtitle>Aggregation Pipelines &amp; Functions</Subtitle>
       </Slide>
 
-      <CodeSlide title="Aggregation Pipeline" lang="javascript">
+      <Slide>
+        <Title>Querying</Title>
+        <Image src={ImgAggregation} />
+      </Slide>
+
+      {/* <CodeSlide title="Aggregation Pipeline" lang="javascript">
 {`
 [
   {
@@ -284,23 +341,24 @@ fetch(URL)
     this.setState(data);
   });
 `}
-      </CodeSlide>
+      </CodeSlide> */}
 
-      <CodeSlide title="Using Serverless" lang="javascript">
+      <CodeSlide title="Querying" lang="javascript">
 {`
 [
-  { $sort: {receivedAt: -1}},
-  {$limit: 1},
-  {$addFields: {
+  { $match: { data.temp: { $ne: -1 } } },
+  { $sort: { receivedAt: -1 } },
+  { $limit: 1 },
+  { $addFields: {
     temp: { $convert: { input: "$data.temp", to: "int" } },
     humidity: { $convert: { input: "$data.humidity", to: "int" } }
-  }}, 
-  {$project: { temp: 1, humidity: 1, receivedAt: 1}}
+  } }, 
+  { $project: { temp: 1, humidity: 1, receivedAt: 1 } }
 ]
 `}
       </CodeSlide>
 
-      <CodeSlide title="Using Serverless" lang="javascript">
+      <CodeSlide title="Querying" lang="javascript">
 {`
 fetch(URL)
   .then(response => response.json())
@@ -312,39 +370,38 @@ fetch(URL)
 `}
       </CodeSlide>
 
-      <Temp />
-
       <CodeSlide title="Watching for changes" lang="javascript">
 {`
-const app = new Realm.App({ id: REALM_ID });
-const credentials = Realm.Credentials.anonymous();
-let user = await app.logIn(credentials);
-let temps = user.mongoClient("mongodb-atlas")
-    .db("espruino").collection("incoming");
-
-(async () => {
-  for await (const change of temps.watch()) {
-    let doc = change.fullDocument;
-    let newState = Object.assign({}, this.state, doc);
-    this.setState(newState);
-  }
-})();
+const collection = client.db("espruino").collection("incoming");
+const changeStream = collection.watch();
+changeStream.on('change', fullDocument => {
+  let newState = Object.assign({}, this.state, fullDocument);
+  this.setState(newState);
+});
 `}
       </CodeSlide>
 
+      <Temp />
+
+      <Slide>
+        <Image src={ImgDiagramTriggers} />
+      </Slide>
+{/*
       <Temp withRealm={true} />
 
       <Slide>
         <Title>Notifications</Title>
         <Subtitle>Database Triggers</Subtitle>
       </Slide>
-
+ */}
       <Slide>
-        <Title>Notifications</Title>
+        <Title>Triggers</Title>
         <Image src={ImgTrigger} />
       </Slide>
 
-      <ImageWithTitle img={ImgMindBlown} />
+      <Slide>
+        <Image src={ImgDiagramCharts} />
+      </Slide>
 
       <Slide>
         <Title>Reporting</Title>
@@ -352,18 +409,25 @@ let temps = user.mongoClient("mongodb-atlas")
       </Slide>
 
       <Slide>
+        <Title>Reporting</Title>
+        <Image src={ImgCharts} />
+      </Slide>
+
+      <Slide>
         <Browser url="https://brainbrew.ca" />
       </Slide>
+
+      <ImageWithTitle img={ImgMindBlown} />
 
       <Slide>
         <Title>Recap</Title>
         <List>
           <li>Iot and JavaScript 😍</li>
-          <li>Beer Brewing Basics🍻</li>
+          <li>Beer Brewing Basics 🍻</li>
           <li>Sensors and Data ✅</li>
         </List>
       </Slide>
-      
+
       <ThankYou 
         title={talkProps.title}
         conference={talkProps.conference}
